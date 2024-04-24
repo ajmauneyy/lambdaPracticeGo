@@ -23,8 +23,8 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 			Headers: map[string]string{
 				"Content-Type": "application/json",
 			},
-			Body: `{"error": "Internal server error encountered when unmarshalling}`,
-		}, err
+			Body: fmt.Sprintf(`{"error": "Internal server error encountered when unmarshalling.  Error is: %s"}`, err),
+		}, nil
 	}
 
 	msg := fmt.Sprintf("Hello %v, your id is: %v and your message is: %v", *person.FirstName, *person.Id, *person.Msg)
@@ -40,8 +40,8 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 			Headers: map[string]string{
 				"Content-Type": "application/json",
 			},
-			Body: `{"error": "Internal server error encountered when marshalling}`,
-		}, err
+			Body: fmt.Sprintf(`{"error": "Internal server error encountered when marshalling.  Error is: %s"}`, err),
+		}, nil
 	}
 
 	response := events.APIGatewayProxyResponse{
